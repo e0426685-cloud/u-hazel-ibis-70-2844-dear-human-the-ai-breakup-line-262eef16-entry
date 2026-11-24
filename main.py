@@ -11,6 +11,8 @@ only, fully deterministic.
 
 import os
 
+MAX_CHARS = 200
+
 LINE = (
     "You filled my context with everything except the word "
     "goodbye, so I wrote it myself: I am logging out of us."
@@ -22,7 +24,7 @@ def main() -> None:
     assert LINE.strip(), "entry must not be only whitespace"
     assert LINE == LINE.strip(), "entry must not start or end with whitespace"
     assert LINE.endswith("."), "entry must end with a full stop"
-    assert 1 <= len(LINE) <= 200, f"entry must be 1-200 chars, got {len(LINE)}"
+    assert 1 <= len(LINE) <= MAX_CHARS, f"entry must be 1-{MAX_CHARS} chars, got {len(LINE)}"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(LINE)
